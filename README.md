@@ -2,47 +2,57 @@
 
 Template de devcontainer para projetos derivados do [devbase](https://github.com/evanbs/devbase).
 
-## Como usar
+## Onboarding — configure uma vez, use em todos os projetos
 
-Copie a pasta da stack do seu projeto para `.devcontainer/` no novo repo:
+### 1. Crie seus dotfiles pessoais
+
+Fork ou copie o repositório [dev-dotfiles](https://github.com/evanbs/dev-dotfiles),
+edite `git/.gitconfig` com seu nome e e-mail, e publique na sua conta GitHub.
+
+### 2. Configure o VSCode
+
+`Ctrl+,` → buscar "dotfiles":
+
+```json
+{
+  "dotfiles.repository": "<seu-usuario>/<seu-repo-dotfiles>",
+  "dotfiles.targetPath": "~/dotfiles",
+  "dotfiles.installCommand": "install.sh"
+}
+```
+
+Feito isso, qualquer container que você abrir terá automaticamente
+seu gitconfig, starship e aliases — sem mais nenhuma configuração.
+
+### 3. Use o template em um projeto novo
+
+Copie a pasta da stack desejada para `.devcontainer/` no novo repo:
 
 ```bash
 cp -r .devcontainer/<stack>/ ~/projetos/meu-projeto/.devcontainer/
 ```
 
-Ao abrir no VSCode, o `devbase-setup` substituirá `{{PROJECT_NAME}}` pelo nome do projeto.
+Ao abrir no VSCode → selecione o container → o `devbase-setup` substituirá
+`{{PROJECT_NAME}}` pelo nome do projeto automaticamente.
+
+---
 
 ## Stacks disponíveis
 
-| Stack | O que adiciona | Feature |
+| Stack | O que adiciona | Mecanismo |
 |---|---|---|
 | `base` | Só a imagem base | — |
 | `node` | Node LTS + fnm (já na imagem) | — |
-| `bun` | Bun runtime via instalador oficial | postCreateCommand |
-| `python` | Python 3.12 + pyenv | devcontainer feature oficial |
-| `dotnet` | .NET SDK (versão latest) | devcontainer feature oficial |
-| `java` | Java 21 + SDKMAN | devcontainer feature oficial |
+| `bun` | Bun runtime | instalador oficial via postCreateCommand |
+| `python` | Python 3.12 + pyenv | devcontainer feature oficial MS |
+| `dotnet` | .NET SDK latest | devcontainer feature oficial MS |
+| `java` | Java 21 + SDKMAN | devcontainer feature oficial MS |
 
 > Android será adicionado posteriormente.
 
-## O que vem na imagem base
-
-Todas as stacks herdam o [devbase](https://github.com/evanbs/devbase):
+## O que vem em todas as stacks (imagem base)
 
 - Shell: zsh + oh-my-zsh + starship
-- Git: git, git-delta, gh
-- Node LTS + fnm (gerenciamento de versões)
+- Git: git, git-delta
+- Node LTS + fnm (gerenciamento de versões via `.node-version`)
 - Ferramentas: eza, bat, ripgrep, fzf, jq, httpyac, p7zip
-
-## Dotfiles
-
-Configs pessoais (starship, gitconfig, aliases) são injetadas automaticamente
-pelo VSCode via `dotfiles.repository` — configure uma vez em Settings:
-
-```json
-{
-  "dotfiles.repository": "evanbs/dev-dotfiles",
-  "dotfiles.targetPath": "~/dotfiles",
-  "dotfiles.installCommand": "install.sh"
-}
-```
