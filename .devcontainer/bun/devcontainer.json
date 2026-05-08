@@ -1,0 +1,36 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "image": "ghcr.io/evanbs/devbase:latest",
+  "workspaceFolder": "/workspace",
+
+  // Bun instalado via script oficial — PATH configurado automaticamente no ~/.zshrc
+  // Coexiste com Node LTS da imagem base (runtimes independentes)
+
+  // ── Forwarded ports ────────────────────────────────────────────────────
+  "forwardPorts": [
+    // 3000,   // Bun serve / Elysia
+    // 5173    // Vite + Bun
+  ],
+
+  // ── VS Code settings ───────────────────────────────────────────────────
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": { "path": "zsh", "args": ["-l"] }
+        },
+        "editor.formatOnSave": true
+      }
+    }
+  },
+
+  // ── Post-create setup ──────────────────────────────────────────────────
+  "postCreateCommand": "bash -c 'command -v devbase-setup >/dev/null 2>&1 && devbase-setup || true; curl -fsSL https://bun.sh/install | bash'",
+
+  // ── Environment variables ──────────────────────────────────────────────
+  "remoteEnv": {
+    // "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    // "GH_TOKEN":          "${localEnv:GH_TOKEN}"
+  }
+}

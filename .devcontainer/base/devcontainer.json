@@ -1,0 +1,30 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "image": "ghcr.io/evanbs/devbase:latest",
+  "workspaceFolder": "/workspace",
+
+  // ── Forwarded ports ────────────────────────────────────────────────────
+  "forwardPorts": [],
+
+  // ── VS Code settings ───────────────────────────────────────────────────
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": { "path": "zsh", "args": ["-l"] }
+        },
+        "editor.formatOnSave": true
+      }
+    }
+  },
+
+  // ── Post-create setup ──────────────────────────────────────────────────
+  "postCreateCommand": "command -v devbase-setup >/dev/null 2>&1 && devbase-setup || true",
+
+  // ── Environment variables ──────────────────────────────────────────────
+  "remoteEnv": {
+    // "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    // "GH_TOKEN":          "${localEnv:GH_TOKEN}"
+  }
+}
