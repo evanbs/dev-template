@@ -28,7 +28,7 @@
   },
 
   // ── Post-create setup ──────────────────────────────────────────────────
-  "postCreateCommand": "command -v devbase-setup >/dev/null 2>&1 && devbase-setup || true",
+  "postCreateCommand": "bash -c 'command -v devbase-setup >/dev/null 2>&1 && devbase-setup || true; mkdir -p .vscode; [ ! -f .vscode/launch.json ] && cp .devcontainer/node/launch.json .vscode/; [ ! -f .vscode/tasks.json ] && cp .devcontainer/node/tasks.json .vscode/; true'",
 
   // ── Environment variables ──────────────────────────────────────────────
   "remoteEnv": {

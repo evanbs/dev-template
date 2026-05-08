@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug: arquivo atual",
+      "type": "node",
+      "request": "launch",
+      "program": "${file}",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug: npm run dev",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "skipFiles": ["<node_internals>/**"],
+      "serverReadyAction": {
+        "pattern": "listening on .*(https?://\\S+|[0-9]+)",
+        "uriFormat": "http://localhost:%s",
+        "action": "openExternally"
+      }
+    },
+    {
+      "name": "Debug: npm start",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug: attach",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
