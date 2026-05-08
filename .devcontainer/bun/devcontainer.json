@@ -29,7 +29,10 @@
   "postCreateCommand": "bash -c 'command -v devbase-setup >/dev/null 2>&1 && devbase-setup || true; curl -fsSL https://bun.sh/install | bash'",
 
   // ── Environment variables ──────────────────────────────────────────────
+  // PATH estendido para incluir bun — o instalador só escreve no .bashrc,
+  // mas o container usa zsh. remoteEnv resolve sem tocar em arquivos de shell.
   "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/vscode/.bun/bin"
     // "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
     // "GH_TOKEN":          "${localEnv:GH_TOKEN}"
   }
