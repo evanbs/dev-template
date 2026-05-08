@@ -1,6 +1,7 @@
 {
   "name": "{{PROJECT_NAME}}",
   "image": "ghcr.io/evanbs/devbase:latest",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
 
   // Bun instalado via script oficial — PATH configurado automaticamente no ~/.zshrc
